@@ -1,0 +1,116 @@
+name: validate
+
+on:
+  push:
+    branches:
+      - develop
+      - "hotfix*"
+
+  pull_request:
+    branches:
+      - develop
+      - "hotfix*"
+    types:
+      - edited
+      - opened
+      - ready_for_review
+      - reopened
+      - synchronize
+
+  workflow_call:
+
+  workflow_dispatch:
+
+jobs:
+  audit:
+    permissions:
+      contents: read
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: checkout origin repo
+        uses: actions/checkout@v5.0.0
+
+      - name: setup rust
+        uses: dtolnay/rust-toolchain@master
+        with:
+          toolchain: stable
+
+      - name: cache rust
+        uses: Swatinem/rust-cache@v2.8.0
+
+      - name: install cargo-audit
+        run: cargo install cargo-audit --locked
+
+      - name: check audit
+        run: cargo audit --deny warnings
+
+  docs-lint-deps:
+    permissions:
+      contents: read
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - name: checkout origin repo
+        uses: actions/checkout@v5.0.0
+
+      - name: setup rust
+        uses: dtolnay/rust-toolchain@master
+        with:
+          components: clippy
+          toolchain: nightly
+
+      - name: cache rust
+        uses: Swatinem/rust-cache@v2.8.0
+
+      - name: check lint
+        run: cargo +stable clippy -- --deny warnings
+
+      - name: check docs
+        run: cargo +stable doc --no-deps
+
+      - name: install cargo-udeps
+        run: cargo install cargo-udeps --locked
+
+      - name: check dependencies
+        run: cargo +nightly udeps --locked
+
+  format:
+    permissions:
+      contents: read
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: checkout origin repo
+        uses: actions/checkout@v5.0.0
+
+      - name: setup rust
+        uses: dtolnay/rust-toolchain@master
+        with:
+          toolchain: stable
+
+      - name: cache rust
+        uses: Swatinem/rust-cache@v2.8.0
+
+      - name: check format
+        run: cargo fmt --check
+
+  test:
+    permissions:
+      contents: read
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: checkout origin repo
+        uses: actions/checkout@v5.0.0
+
+      - name: setup rust
+        uses: dtolnay/rust-toolchain@master
+        with:
+          toolchain: stable
+
+      - name: cache rust
+        uses: Swatinem/rust-cache@v2.8.0
+
+      - name: run tests
+        run: cargo test -- --test-threads=1

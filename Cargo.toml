@@ -4,6 +4,9 @@ version = "0.1.0"
 edition = "2024"
 description = "pre-compiled gRPC client and server stubs for the envoy ext_proc protocol"
 license = "MIT"
+homepage = "https://github.com/dariocurr/envoy-grpc-ext-proc"
+repository = "https://github.com/dariocurr/envoy-grpc-ext-proc"
+documentation = "https://docs.rs/envoy-grpc-ext-proc"
 
 [dependencies]
 prost = "0.14"

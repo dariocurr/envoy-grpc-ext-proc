@@ -1,19 +1,26 @@
 [package]
-name = "envoy-ext-proc-stubs"
-version = "0.1.1"
-edition = "2021"
-description = "Pre-compiled gRPC client and server stubs for the Envoy ext_proc protocol"
+name = "envoy-grpc-ext-proc"
+version = "0.1.0"
+edition = "2024"
+description = "pre-compiled gRPC client and server stubs for the envoy ext_proc protocol"
 license = "MIT"
 
 [dependencies]
-prost = "0.11"
-prost-types = "0.11"
-tonic = "0.8"
+prost = "0.14"
+prost-types = "0.14"
+tonic = "0.14"
+tonic-prost = "0.14"
 
 [build-dependencies]
-prost-build = "0.11"
-tonic-build = "0.8"
+tonic-prost-build = "0.14"
 
-[lib]
-name = "envoy_ext_proc_stubs"
-doctest = false
+[dev-dependencies]
+futures = "0.3"
+tonic = "0.14"
+
+[dev-dependencies.tokio]
+version = "1.47"
+features = [
+    "macros",
+    "rt-multi-thread",
+]

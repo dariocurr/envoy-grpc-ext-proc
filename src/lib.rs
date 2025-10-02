@@ -23,7 +23,7 @@
 //!     type ProcessStream = pin::Pin<
 //!         Box<dyn Stream<Item = Result<v3::ProcessingResponse, Status>> + Send + 'static>,
 //!     >;
-//!     
+//!
 //!     async fn process(
 //!         &self,
 //!         request: Request<Streaming<v3::ProcessingRequest>>,

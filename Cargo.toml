@@ -15,6 +15,7 @@ tonic = "0.14"
 tonic-prost = "0.14"
 
 [build-dependencies]
+protoc-bin-vendored = "3.2"
 tonic-prost-build = "0.14"
 
 [dev-dependencies]
@@ -24,6 +25,12 @@ tonic = "0.14"
 [dev-dependencies.tokio]
 version = "1.48"
 features = [
-    "macros",
     "rt-multi-thread",
+]
+
+[package.metadata.cargo-udeps.ignore]
+development = [
+    "futures",
+    "tokio",
+    "tonic",
 ]

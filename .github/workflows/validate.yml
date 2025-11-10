@@ -97,6 +97,6 @@ jobs:
         run: cargo install cargo-udeps --locked
 
       - name: check dependencies
-        run: cargo +nightly udeps --locked
+        run: cargo +nightly udeps --locked --all-targets
       - name: run tests
         run: cargo test -- --test-threads=1

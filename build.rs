@@ -1,6 +1,10 @@
-fn main() -> Result<(), Box<dyn std::error::Error>> {
+use std::{env, error};
+
+fn main() -> Result<(), Box<dyn error::Error>> {
     let protoc = protoc_bin_vendored::protoc_bin_path()?;
-    println!("cargo:rustc-env=PROTOC={}", protoc.display());
+    unsafe {
+        env::set_var("PROTOC", protoc);
+    }
     tonic_prost_build::configure()
         .build_client(true)
         .build_server(true)

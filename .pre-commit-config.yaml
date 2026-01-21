@@ -32,10 +32,10 @@ repos:
       - id: trailing-whitespace
 
   - repo: https://github.com/gitleaks/gitleaks
-    rev: v8.29.0
+    rev: v8.30.0
     hooks:
       - id: gitleaks
 
 ci:
-  autoupdate_branch: develop
+  autoupdate_branch: dev
   autoupdate_commit_msg: ⬆ [pre-commit.ci] pre-commit autoupdate

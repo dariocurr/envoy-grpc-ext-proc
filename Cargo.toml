@@ -23,7 +23,7 @@ futures = "0.3"
 tonic = "0.14"
 
 [dev-dependencies.tokio]
-version = "1.50"
+version = "1.51"
 features = [
     "rt-multi-thread",
 ]

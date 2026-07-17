@@ -1,6 +1,6 @@
 [package]
 name = "envoy-grpc-ext-proc"
-version = "0.1.2"
+version = "0.1.3"
 edition = "2024"
 description = "pre-compiled gRPC client and server stubs for the envoy ext_proc protocol"
 license = "MIT"
@@ -23,7 +23,7 @@ futures = "0.3"
 tonic = "0.14"
 
 [dev-dependencies.tokio]
-version = "1.49"
+version = "1.52"
 features = [
     "rt-multi-thread",
 ]

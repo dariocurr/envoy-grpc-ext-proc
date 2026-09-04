@@ -102,7 +102,7 @@ jobs:
 
       - name: deploy to github pages
         id: deployment
-        uses: actions/deploy-pages@v5.0.0
+        uses: actions/deploy-pages@v5.0.1
 
   update-branches:
     needs: release
